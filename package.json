@@ -1,0 +1,32 @@
+{
+  "name": "rehype-svimg",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A rehype plugin to preprocess and render images with the svimg Svelte component",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rehype",
+    "svimg",
+    "svelte",
+    "image"
+  ],
+  "author": "Chris Han <christopher.f.han@gmail.com> (chris-han.com)",
+  "homepage": "https://github.com/xiphux/rehype-svimg",
+  "bugs": {
+    "url": "https://github.com/xiphux/rehype-svimg/issues",
+    "email": "christopher.f.han@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiphux/rehype-svimg.git"
+  },
+  "license": "ISC"
+}
