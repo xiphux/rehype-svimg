@@ -137,6 +137,7 @@ const htmlContent = await processor.process(markdownContent);
 ## Built With
 
 * [unified](https://unifiedjs.com)
+* [rehype](https://github.com/rehypejs/rehype)
 * [svimg](https://github.com/xiphux/svimg)
 
 ## Authors
