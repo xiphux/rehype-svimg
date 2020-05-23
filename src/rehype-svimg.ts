@@ -19,6 +19,8 @@ interface ImageNode {
     },
 }
 
+const TAG_NAME = 's-image';
+
 export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
 
     if (!options?.inputDir) {
@@ -68,7 +70,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             if (options?.width && !node.properties.width) {
                 node.properties.width = options.width.toString();
             }
-            node.tagName = 's-image';
+            node.tagName = TAG_NAME;
         }
 
         return tree;
