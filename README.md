@@ -18,6 +18,12 @@ export default {
 };
 ```
 
+Since rehype-svimg generates svimg as a custom element, you'll need to make sure to include the custom element code in your client bundle wherever the rehype html content will eventually be displayed. For example, if you're displaying your Markdown as HTML in [Sapper](https://sapper.svelte.dev), you could include it in your `client.js`:
+
+```js
+import 'svimg/dist/s-image';
+```
+
 ### Usage
 
 #### Basic usage
