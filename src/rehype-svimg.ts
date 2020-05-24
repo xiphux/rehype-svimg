@@ -3,7 +3,7 @@ import visit from 'unist-util-visit';
 import { Node } from 'unist';
 import { ImageProcessingQueue, PlaceholderQueue, generateComponentAttributes } from 'svimg/dist/process';
 
-interface RehypeSvimgOptions {
+export interface RehypeSvimgOptions {
     inputDir: string;
     outputDir: string;
     webp?: boolean;
