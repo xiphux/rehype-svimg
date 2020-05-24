@@ -39,12 +39,12 @@
     "jest": "^26.0.1",
     "rollup": "^2.10.2",
     "rollup-plugin-typescript2": "^0.27.1",
-    "svimg": "^0.1.1",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.2",
     "unified": "^9.0.0"
   },
   "dependencies": {
+    "svimg": "^0.1.4",
     "unist-util-visit": "^2.0.2"
   }
 }
