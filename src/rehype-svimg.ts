@@ -1,7 +1,7 @@
 import { Transformer } from 'unified';
 import visit from 'unist-util-visit';
 import { Node } from 'unist';
-import { ImageProcessingQueue, PlaceholderQueue, generateComponentAttributes } from 'svimg/dist/process';
+import { Queue, generateComponentAttributes } from 'svimg/dist/process';
 
 export interface RehypeSvimgOptions {
     inputDir: string;
@@ -30,8 +30,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
         throw new Error('Output dir is required');
     }
 
-    const processingQueue = new ImageProcessingQueue();
-    const placeholderQueue = new PlaceholderQueue();
+    const queue = new Queue();
 
     return async function transformer(tree, file): Promise<Node> {
 
@@ -41,9 +40,9 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             imageNodes.push(node as any as ImageNode);
         });
 
-        for (const node of imageNodes) {
+        await Promise.all(imageNodes.map(async (node) => {
             if (!(node.properties && node.properties.src)) {
-                continue;
+                return;
             }
 
             let width: number | undefined;
@@ -57,8 +56,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
 
             const attributes = await generateComponentAttributes({
                 src: node.properties.src,
-                processingQueue,
-                placeholderQueue,
+                queue,
                 inputDir: options.inputDir,
                 outputDir: options.outputDir,
                 webp: options.webp,
@@ -71,7 +69,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 node.properties.width = options.width.toString();
             }
             node.tagName = TAG_NAME;
-        }
+        }));
 
         return tree;
     }

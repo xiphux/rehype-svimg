@@ -1,6 +1,6 @@
 import rehypeSvimg from '../src/rehype-svimg';
 import visit from 'unist-util-visit';
-import { ImageProcessingQueue, PlaceholderQueue, generateComponentAttributes } from 'svimg/dist/process';
+import { Queue, generateComponentAttributes } from 'svimg/dist/process';
 
 jest.mock('unist-util-visit', () => ({
     default: jest.fn()
@@ -11,8 +11,7 @@ describe('rehypeSvimg', () => {
 
     beforeEach(() => {
         (visit as any as jest.Mock).mockReset();
-        (ImageProcessingQueue as jest.Mock).mockReset();
-        (PlaceholderQueue as jest.Mock).mockReset();
+        (Queue as jest.Mock).mockReset();
         (generateComponentAttributes as jest.Mock).mockReset();
     });
 
@@ -31,10 +30,8 @@ describe('rehypeSvimg', () => {
     });
 
     it('does nothing without img elements', async () => {
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor({
                 type: 'text',
@@ -86,10 +83,8 @@ describe('rehypeSvimg', () => {
                 end: { line: 29, column: 64, offset: 2273 }
             }
         };
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor(node1);
             visitor(node2);
@@ -117,16 +112,14 @@ describe('rehypeSvimg', () => {
         expect(generateComponentAttributes).toHaveBeenCalledTimes(2);
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-1.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -195,10 +188,8 @@ describe('rehypeSvimg', () => {
                 end: { line: 29, column: 64, offset: 2273 }
             }
         };
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor(node1);
             visitor(node2);
@@ -226,8 +217,7 @@ describe('rehypeSvimg', () => {
         expect(generateComponentAttributes).toHaveBeenCalledTimes(2);
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-1.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -235,8 +225,7 @@ describe('rehypeSvimg', () => {
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -305,10 +294,8 @@ describe('rehypeSvimg', () => {
                 end: { line: 29, column: 64, offset: 2273 }
             }
         };
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor(node1);
             visitor(node2);
@@ -335,8 +322,7 @@ describe('rehypeSvimg', () => {
         expect(generateComponentAttributes).toHaveBeenCalledTimes(2);
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-1.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -344,8 +330,7 @@ describe('rehypeSvimg', () => {
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -411,10 +396,8 @@ describe('rehypeSvimg', () => {
                 end: { line: 29, column: 64, offset: 2273 }
             }
         };
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor(node1);
             visitor(node2);
@@ -443,8 +426,7 @@ describe('rehypeSvimg', () => {
         expect(generateComponentAttributes).toHaveBeenCalledTimes(2);
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-1.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -452,8 +434,7 @@ describe('rehypeSvimg', () => {
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -538,10 +519,8 @@ describe('rehypeSvimg', () => {
                 end: { line: 29, column: 64, offset: 2273 }
             }
         };
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor(node1);
             visitor(node2);
@@ -576,8 +555,7 @@ describe('rehypeSvimg', () => {
         expect(generateComponentAttributes).toHaveBeenCalledTimes(3);
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-1.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -585,16 +563,14 @@ describe('rehypeSvimg', () => {
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-3.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
@@ -681,10 +657,8 @@ describe('rehypeSvimg', () => {
                 end: { line: 29, column: 64, offset: 2273 }
             }
         };
-        const processingQueue = { process: jest.fn(), processing: true };
-        const placeholderQueue = { process: jest.fn(), placeholder: true };
-        (ImageProcessingQueue as jest.Mock).mockReturnValue(processingQueue);
-        (PlaceholderQueue as jest.Mock).mockReturnValue(placeholderQueue);
+        const queue = { process: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
         (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
             visitor(node1);
             visitor(node2);
@@ -713,16 +687,14 @@ describe('rehypeSvimg', () => {
         expect(generateComponentAttributes).toHaveBeenCalledTimes(2);
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-1.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: false,
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
-            processingQueue,
-            placeholderQueue,
+            queue,
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: false,
