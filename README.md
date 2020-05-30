@@ -57,7 +57,7 @@ const processor = unified()
 const htmlContent = await processor.process(markdownContent);
 ```
 
-By default, the plugin will only populate the component and its appropriate srcset attributes without actually creating the resized image files, instead expecting the resizing to have been already been done during build (for example, with a rollup plugin).
+By default, the plugin will only populate the component and its appropriate srcset attributes without actually creating the resized image files, instead expecting the resizing to have been already been done during build with a plugin such as [rollup-plugin-markdown-svimg](https://github.com/xiphux/rollup-plugin-markdown-svimg).
 
 #### With image generation
 
