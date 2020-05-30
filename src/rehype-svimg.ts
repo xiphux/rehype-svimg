@@ -9,6 +9,7 @@ export interface RehypeSvimgOptions {
     webp?: boolean;
     width?: number;
     generateImages?: boolean;
+    srcPrefix?: string;
 }
 
 interface ImageNode {
@@ -40,6 +41,10 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             imageNodes.push(node as any as ImageNode);
         });
 
+        if (options.srcPrefix && !options.srcPrefix.endsWith('/')) {
+            options.srcPrefix += '/';
+        }
+
         await Promise.all(imageNodes.map(async (node) => {
             if (!(node.properties && node.properties.src)) {
                 return;
@@ -54,8 +59,13 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 width = options.width;
             }
 
+            let src = node.properties.src;
+            if (options.srcPrefix) {
+                src = options.srcPrefix + src;
+            }
+
             const attributes = await generateComponentAttributes({
-                src: node.properties.src,
+                src,
                 queue,
                 inputDir: options.inputDir,
                 outputDir: options.outputDir,
@@ -65,6 +75,9 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             });
 
             Object.assign(node.properties, attributes);
+            if (src !== node.properties.src) {
+                node.properties.src = src;
+            }
             if (options?.width && !node.properties.width) {
                 node.properties.width = options.width.toString();
             }

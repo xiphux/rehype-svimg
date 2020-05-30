@@ -128,6 +128,41 @@ const processor = unified()
 const htmlContent = await processor.process(markdownContent);
 ```
 
+#### Src Prefix
+
+It's possible to specify a prefix that will be automatically added to every src before processing. This can be useful for serving images from subdirectories without having to type out the subdirectory for every image in the markdown. For example, images could be stored and automatically served from directories named based on the markdown file's directory.
+
+`posts/20200101/hello.md`:
+```markdown
+![Splash](splash.jpg)
+```
+
+```js
+import unified from 'unified';
+import markdown from 'remark-parse';
+import remark2rehype from 'remark-rehype';
+import rehypeSvimg from 'rehype-svimg';
+import html from 'rehype-stringify';
+import { join, dirname } from 'path';
+
+const filename = 'posts/20200101/hello.md';
+
+const processor = unified()
+    .use(markdown)
+    .use(remark2rehype)
+    .use(rehypeSvimg, {
+        inputDir: 'static',
+        outputDir: 'static/g',
+        webp: true,
+        srcPrefix: join('images', dirname(filename)),
+    })
+    .use(html);
+const htmlContent = await processor.process(markdownContent);
+```
+
+This configuration would read the file from `static/images/posts/20200101/splash.jpg`, write the processed images to `static/g/images/posts/20200101/splash.{jpg,webp}`, and produce HTML from the markdown with an `<Image>` component that had srcsets referring to `g/images/posts/20200101/splash.{jpg,webp}`, without needing to repeatedly type `images/posts/20200101/` for every image in the markdown. 
+
+
 ### Configuration
 
 #### Plugin options
@@ -138,7 +173,8 @@ const htmlContent = await processor.process(markdownContent);
 | outputDir      | *required* | The output directory where resized image files should be written to |
 | webp           | true       | Whether to generate WebP versions of images in addition to the original image formats |
 | width          |            | Default width for images. Images that do not have a width set will use this width |
-| generateImages | false     | Whether to generate the actual resized image files in addition to the appropriate component attributes |
+| generateImages | false      | Whether to generate the actual resized image files in addition to the appropriate component attributes |
+| srcPrefix      |            | Prefix to add to every image url processed in the markdown |
 
 ## Built With
 
