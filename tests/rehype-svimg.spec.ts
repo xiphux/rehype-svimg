@@ -942,4 +942,109 @@ describe('rehypeSvimg', () => {
         });
     });
 
+    it('skips placeholder if immediate is set', async () => {
+        const node1 = {
+            type: 'element',
+            tagName: 'img',
+            properties: {
+                src: 'images/posts/2020-03-14/test-layer-1.jpg',
+                alt: 'Test layer 1',
+                immediate: '',
+            },
+            children: [] as any,
+            position: {
+                start: { line: 29, column: 5, offset: 2214 },
+                end: { line: 29, column: 64, offset: 2273 }
+            }
+        };
+        const node2 = {
+            type: 'element',
+            tagName: 'img',
+            properties: {
+                src: 'images/posts/2020-03-14/test-layer-2.jpg',
+                alt: 'Test layer 2',
+                immediate: 'true',
+            },
+            children: [] as any,
+            position: {
+                start: { line: 29, column: 5, offset: 2214 },
+                end: { line: 29, column: 64, offset: 2273 }
+            }
+        };
+        const queue = { enqueue: jest.fn() };
+        (Queue as jest.Mock).mockReturnValue(queue);
+        (visit as any as jest.Mock).mockImplementation((node: any, test: any, visitor: Function) => {
+            visitor(node1);
+            visitor(node2);
+        });
+        const tree = { tree: true };
+        (generateComponentAttributes as jest.Mock).mockImplementationOnce(() => Promise.resolve({
+            srcset: 'test-layer-1.jpg 500w',
+            srcsetwebp: 'test-layer-1.webp 500w',
+        })).mockImplementationOnce(() => Promise.resolve({
+            srcset: 'test-layer-2.jpg 500w',
+            srcsetwebp: 'test-layer-2.webp 500w',
+        }));
+
+        const transformer = rehypeSvimg({
+            inputDir: 'static',
+            outputDir: 'static/g',
+        });
+
+        expect(await transformer(tree as any, {} as any)).toEqual(tree);
+
+        expect(visit).toHaveBeenCalledWith(tree, { type: 'element', tagName: 'img' }, expect.any(Function));
+
+        expect(generateComponentAttributes).toHaveBeenCalledTimes(2);
+        expect(generateComponentAttributes).toHaveBeenCalledWith({
+            src: 'images/posts/2020-03-14/test-layer-1.jpg',
+            queue,
+            inputDir: 'static',
+            outputDir: 'static/g',
+            skipGeneration: true,
+            skipPlaceholder: true,
+        });
+        expect(generateComponentAttributes).toHaveBeenCalledWith({
+            src: 'images/posts/2020-03-14/test-layer-2.jpg',
+            queue,
+            inputDir: 'static',
+            outputDir: 'static/g',
+            skipGeneration: true,
+            skipPlaceholder: true,
+        });
+
+        expect(node1).toEqual({
+            type: 'element',
+            tagName: 's-image',
+            properties: {
+                src: 'images/posts/2020-03-14/test-layer-1.jpg',
+                alt: 'Test layer 1',
+                srcset: 'test-layer-1.jpg 500w',
+                srcsetwebp: 'test-layer-1.webp 500w',
+                immediate: '',
+            },
+            children: [],
+            position: {
+                start: { line: 29, column: 5, offset: 2214 },
+                end: { line: 29, column: 64, offset: 2273 }
+            }
+        });
+        expect(node2).toEqual({
+            type: 'element',
+            tagName: 's-image',
+            properties: {
+                src: 'images/posts/2020-03-14/test-layer-2.jpg',
+                alt: 'Test layer 2',
+                srcset: 'test-layer-2.jpg 500w',
+                srcsetwebp: 'test-layer-2.webp 500w',
+                immediate: 'true',
+            },
+            children: [],
+            position: {
+                start: { line: 29, column: 5, offset: 2214 },
+                end: { line: 29, column: 64, offset: 2273 }
+            }
+        });
+    });
+
 });

@@ -64,6 +64,8 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 src = options.srcPrefix + src;
             }
 
+            const immediate = node.properties.immediate === '' || node.properties.immediate === 'true';
+
             const attributes = await generateComponentAttributes({
                 src,
                 queue,
@@ -72,6 +74,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 webp: options.webp,
                 widths: width ? [width] : undefined,
                 skipGeneration: !(options?.generateImages),
+                skipPlaceholder: immediate || undefined,
             });
 
             Object.assign(node.properties, attributes);
