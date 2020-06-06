@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+* Skip placeholder generation if immediate is set
+
 ## 0.1.2
 
 * Add srcPrefix option
