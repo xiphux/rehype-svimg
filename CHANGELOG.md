@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+* Support blur and quality svimg options
+
 ## 0.1.3
 
 * Skip placeholder generation if immediate is set

@@ -171,10 +171,12 @@ This configuration would read the file from `static/images/posts/20200101/splash
 | -------------- | ---------- | --------- |
 | inputDir       | *required* | The static asset directory where image urls are retrieved from |
 | outputDir      | *required* | The output directory where resized image files should be written to |
-| webp           | true       | Whether to generate WebP versions of images in addition to the original image formats |
+| webp           | *see [svimg](https://github.com/xiphux/svimg)* | Whether to generate WebP versions of images in addition to the original image formats |
 | width          |            | Default width for images. Images that do not have a width set will use this width |
-| generateImages | false      | Whether to generate the actual resized image files in addition to the appropriate component attributes |
+| generateImages | `false`    | Whether to generate the actual resized image files in addition to the appropriate component attributes |
 | srcPrefix      |            | Prefix to add to every image url processed in the markdown |
+| blur           | *see [svimg](https://github.com/xiphux/svimg)* | Amount of blur to apply to placeholder |
+| quality        | *see [svimg](https://github.com/xiphux/svimg)* | Quality of the resized images |
 
 ## Built With
 
