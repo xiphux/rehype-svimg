@@ -8,6 +8,8 @@ export interface RehypeSvimgOptions {
     outputDir: string;
     webp?: boolean;
     width?: number;
+    blur?: number;
+    quality?: number;
     generateImages?: boolean;
     srcPrefix?: string;
 }
@@ -21,6 +23,20 @@ interface ImageNode {
 }
 
 const TAG_NAME = 's-image';
+
+function getIntOption(props: { [attr: string]: string }, options: RehypeSvimgOptions, prop: 'width' | 'blur' | 'quality'): number | undefined {
+    const propVal = props[prop];
+
+    if (propVal) {
+        if (/^[0-9]+$/.test(propVal)) {
+            return parseInt(propVal, 10);
+        }
+    } else if (options && options[prop]) {
+        return options[prop];
+    }
+
+    return undefined;
+}
 
 export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
 
@@ -50,14 +66,9 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 return;
             }
 
-            let width: number | undefined;
-            if (node.properties.width) {
-                if (/^[0-9]+$/.test(node.properties.width)) {
-                    width = parseInt(node.properties.width, 10);
-                }
-            } else if (options?.width) {
-                width = options.width;
-            }
+            const width = getIntOption(node.properties, options, 'width');
+            const blur = getIntOption(node.properties, options, 'blur');
+            const quality = getIntOption(node.properties, options, 'quality');
 
             let src = node.properties.src;
             if (options.srcPrefix) {
@@ -73,6 +84,8 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 outputDir: options.outputDir,
                 webp: options.webp,
                 widths: width ? [width] : undefined,
+                blur,
+                quality,
                 skipGeneration: !(options?.generateImages),
                 skipPlaceholder: immediate || undefined,
             });
@@ -83,6 +96,12 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             }
             if (options?.width && !node.properties.width) {
                 node.properties.width = options.width.toString();
+            }
+            if (options?.blur && !node.properties.blur) {
+                node.properties.blur = options.blur.toString();
+            }
+            if (options?.quality && !node.properties.quality) {
+                node.properties.quality = options.quality.toString();
             }
             node.tagName = TAG_NAME;
         }));

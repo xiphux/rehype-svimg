@@ -44,7 +44,7 @@
     "unified": "^9.0.0"
   },
   "dependencies": {
-    "svimg": "^0.2.0",
+    "svimg": "^0.3.0",
     "unist-util-visit": "^2.0.2"
   }
 }
