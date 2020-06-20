@@ -24,7 +24,7 @@ interface ImageNode {
 
 const TAG_NAME = 's-image';
 
-function getIntOption(props: { [attr: string]: string }, options: RehypeSvimgOptions, prop: 'width' | 'blur' | 'quality'): number | undefined {
+function getIntOption(props: { [attr: string]: string }, options: RehypeSvimgOptions, prop: 'width' | 'quality'): number | undefined {
     const propVal = props[prop];
 
     if (propVal) {
@@ -67,7 +67,6 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             }
 
             const width = getIntOption(node.properties, options, 'width');
-            const blur = getIntOption(node.properties, options, 'blur');
             const quality = getIntOption(node.properties, options, 'quality');
 
             let src = node.properties.src;
@@ -84,7 +83,6 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 outputDir: options.outputDir,
                 webp: options.webp,
                 widths: width ? [width] : undefined,
-                blur,
                 quality,
                 skipGeneration: !(options?.generateImages),
                 skipPlaceholder: immediate || undefined,

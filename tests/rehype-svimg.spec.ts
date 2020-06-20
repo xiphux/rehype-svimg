@@ -692,7 +692,6 @@ describe('rehypeSvimg', () => {
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
-            blur: 50,
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
@@ -799,7 +798,6 @@ describe('rehypeSvimg', () => {
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
-            blur: 50,
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
@@ -807,7 +805,6 @@ describe('rehypeSvimg', () => {
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
-            blur: 50,
         });
 
         expect(node1).toEqual({
@@ -927,7 +924,6 @@ describe('rehypeSvimg', () => {
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
-            blur: 60,
         });
         expect(generateComponentAttributes).toHaveBeenCalledWith({
             src: 'images/posts/2020-03-14/test-layer-2.jpg',
@@ -942,7 +938,6 @@ describe('rehypeSvimg', () => {
             inputDir: 'static',
             outputDir: 'static/g',
             skipGeneration: true,
-            blur: 50,
         });
 
         expect(node1).toEqual({
