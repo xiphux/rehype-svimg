@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+* Update svimg for placeholder blur handling changes
+
 ## 0.2.0
 
 * Support blur and quality svimg options
