@@ -52,6 +52,7 @@ const processor = unified()
         inputDir: 'static',
         outputDir: 'static/g',
         webp: true,
+        avif: true,
     })
     .use(html);
 const htmlContent = await processor.process(markdownContent);
@@ -71,6 +72,7 @@ const processor = unified()
         inputDir: 'static',
         outputDir: 'static/g',
         webp: true,
+        avif: true,
         generateImages: true,
     })
     .use(html);
@@ -89,6 +91,7 @@ const processor = unified()
         inputDir: 'static',
         outputDir: 'static/g',
         webp: true,
+        avif: true,
         width: 500,
     })
     .use(html);
@@ -123,6 +126,7 @@ const processor = unified()
         inputDir: 'static',
         outputDir: 'static/g',
         webp: true,
+        avif: true,
     })
     .use(html);
 const htmlContent = await processor.process(markdownContent);
@@ -154,13 +158,14 @@ const processor = unified()
         inputDir: 'static',
         outputDir: 'static/g',
         webp: true,
+        avif: true,
         srcPrefix: join('images', dirname(filename)),
     })
     .use(html);
 const htmlContent = await processor.process(markdownContent);
 ```
 
-This configuration would read the file from `static/images/posts/20200101/splash.jpg`, write the processed images to `static/g/images/posts/20200101/splash.{jpg,webp}`, and produce HTML from the markdown with an `<Image>` component that had srcsets referring to `g/images/posts/20200101/splash.{jpg,webp}`, without needing to repeatedly type `images/posts/20200101/` for every image in the markdown. 
+This configuration would read the file from `static/images/posts/20200101/splash.jpg`, write the processed images to `static/g/images/posts/20200101/splash.{jpg,webp,avif}`, and produce HTML from the markdown with an `<Image>` component that had srcsets referring to `g/images/posts/20200101/splash.{jpg,webp,avif}`, without needing to repeatedly type `images/posts/20200101/` for every image in the markdown. 
 
 
 ### Configuration
@@ -172,6 +177,7 @@ This configuration would read the file from `static/images/posts/20200101/splash
 | inputDir       | *required* | The static asset directory where image urls are retrieved from |
 | outputDir      | *required* | The output directory where resized image files should be written to |
 | webp           | *see [svimg](https://github.com/xiphux/svimg)* | Whether to generate WebP versions of images in addition to the original image formats |
+| avif           | *see [svimg](https://github.com/xiphux/svimg)* | Whether to generate AVIF versions of images in addition to the original image formats |
 | width          |            | Default width for images. Images that do not have a width set will use this width |
 | generateImages | `false`    | Whether to generate the actual resized image files in addition to the appropriate component attributes |
 | srcPrefix      |            | Prefix to add to every image url processed in the markdown |

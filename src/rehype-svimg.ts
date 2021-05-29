@@ -7,6 +7,7 @@ export interface RehypeSvimgOptions {
     inputDir: string;
     outputDir: string;
     webp?: boolean;
+    avif?: boolean;
     width?: number;
     blur?: number;
     quality?: number;
@@ -82,6 +83,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
                 inputDir: options.inputDir,
                 outputDir: options.outputDir,
                 webp: options.webp,
+                avif: options.avif,
                 widths: width ? [width] : undefined,
                 quality,
                 skipGeneration: !(options?.generateImages),
