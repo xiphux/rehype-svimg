@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+* Update svimg for AVIF support
+
 ## 0.2.1
 
 * Update svimg for placeholder blur handling changes
