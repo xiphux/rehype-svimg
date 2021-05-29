@@ -1,6 +1,6 @@
 {
   "name": "rehype-svimg",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": false,
   "description": "A rehype plugin for preprocessing and lazy loading images using the svimg Svelte component",
   "main": "dist/index.js",
