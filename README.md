@@ -183,6 +183,7 @@ This configuration would read the file from `static/images/posts/20200101/splash
 | srcPrefix      |            | Prefix to add to every image url processed in the markdown |
 | blur           | *see [svimg](https://github.com/xiphux/svimg)* | Amount of blur to apply to placeholder |
 | quality        | *see [svimg](https://github.com/xiphux/svimg)* | Quality of the resized images |
+| skip           |            | An optional predicate function which can be used to skip processing images |
 
 ## Built With
 

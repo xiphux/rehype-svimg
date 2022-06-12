@@ -13,6 +13,7 @@ export interface RehypeSvimgOptions {
     quality?: number;
     generateImages?: boolean;
     srcPrefix?: string;
+    skip?: (options: { src: string; }) => boolean;
 }
 
 interface ImageNode {
@@ -73,6 +74,10 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
             let src = node.properties.src;
             if (options.srcPrefix) {
                 src = options.srcPrefix + src;
+            }
+
+            if (options.skip && options.skip({ src })) {
+                return;
             }
 
             const immediate = node.properties.immediate === '' || node.properties.immediate === 'true';
