@@ -36,6 +36,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.6.1",
+    "@types/unist": "2.0.3",
     "jest": "^27.0.1",
     "rollup": "^2.50.3",
     "rollup-plugin-typescript2": "^0.30.0",
