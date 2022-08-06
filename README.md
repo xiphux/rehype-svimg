@@ -180,7 +180,8 @@ This configuration would read the file from `static/images/posts/20200101/splash
 | avif           | *see [svimg](https://github.com/xiphux/svimg)* | Whether to generate AVIF versions of images in addition to the original image formats |
 | width          |            | Default width for images. Images that do not have a width set will use this width |
 | generateImages | `false`    | Whether to generate the actual resized image files in addition to the appropriate component attributes |
-| srcPrefix      |            | Prefix to add to every image url processed in the markdown |
+| srcPrefix      |            | Prefix to add to every image url processed in the markdown, *before* the url is run through svimg |
+| srcGenerator   | *see [svimg](https://github.com/xiphux/svimg)* | An optional function to override the logic of how src URLs are generated for the srcset. This is called once per generated image file, and can be used to customize the generated image URLs - for example, to add or remove path components or to specify a CDN domain.
 | blur           | *see [svimg](https://github.com/xiphux/svimg)* | Amount of blur to apply to placeholder |
 | quality        | *see [svimg](https://github.com/xiphux/svimg)* | Quality of the resized images |
 | skip           |            | An optional predicate function which can be used to skip processing images |

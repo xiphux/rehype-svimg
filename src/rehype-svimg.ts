@@ -2,6 +2,7 @@ import type { Transformer } from 'unified';
 import visit from 'unist-util-visit';
 import type { Node } from 'unist';
 import { Queue, generateComponentAttributes } from 'svimg/dist/process';
+import type { SrcGenerator } from 'svimg';
 
 export interface RehypeSvimgOptions {
   inputDir: string;
@@ -14,6 +15,7 @@ export interface RehypeSvimgOptions {
   generateImages?: boolean;
   srcPrefix?: string;
   skip?: (options: { src: string }) => boolean;
+  srcGenerator?: SrcGenerator;
 }
 
 interface ImageNode {
@@ -98,6 +100,7 @@ export default function rehypeSvimg(options?: RehypeSvimgOptions): Transformer {
           quality,
           skipGeneration: !options?.generateImages,
           skipPlaceholder: immediate || undefined,
+          srcGenerator: options.srcGenerator,
         });
 
         Object.assign(node.properties, attributes);
