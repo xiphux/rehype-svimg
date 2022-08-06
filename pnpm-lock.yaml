@@ -7,7 +7,7 @@ specifiers:
   jest: ^28.1.3
   rollup: ^2.77.2
   rollup-plugin-typescript2: ^0.32.1
-  svimg: ^2.0.0
+  svimg: ^3.1.0
   ts-jest: ^28.0.7
   tslib: ^2.4.0
   typescript: ^4.7.4
@@ -15,7 +15,7 @@ specifiers:
   unist-util-visit: ^2.0.3
 
 dependencies:
-  svimg: 2.0.0
+  svimg: 3.1.0
   unist-util-visit: 2.0.3
 
 devDependencies:
@@ -2089,8 +2089,8 @@ packages:
     resolution: {integrity: sha512-CvkDw2OEnme7ybCykJpVcKH+uAOLV2qLqiyla128dN9TkEWfrYmxG6C2boDe5KcNQqZF3orkqzGgOMvZ/JNekA==}
     dev: false
 
-  /node-html-parser/4.1.4:
-    resolution: {integrity: sha512-Uk9zI1IhGrPTfUyhRvImKGZspsqJ0ss6aRysGfkDuPDPfLisMlInYT/3FCydsC2UamzPPhpOax9xbTVUsO6n8Q==}
+  /node-html-parser/4.1.5:
+    resolution: {integrity: sha512-NLgqUXtftqnBqIjlRjYSaApaqE7TTxfTiH4VqKCjdUJKFOtUzRwney83EHz2qYc0XoxXAkYdmLjENCuZHvsIFg==}
     dependencies:
       css-select: 4.3.0
       he: 1.2.0
@@ -2547,11 +2547,12 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /svimg/2.0.0:
-    resolution: {integrity: sha512-FJC3fTl3n4pJtfPNjc1UfgoiH3XCt606SdDVgA/LEk0ILt80q/bp0Mar8eJBhYx5Jx5FdyM09n6btrnmA/wX6w==}
+  /svimg/3.1.0:
+    resolution: {integrity: sha512-f1EmMPZMeEoCkcNSNFnbw5i+uhnxqGSjkvT/DfV5tQPJQezErH2vQ927//uMOk609MMHKI62wUi8oiPROdqePg==}
+    engines: {node: '>=14.0.0', pnpm: '>=7.0.0'}
     dependencies:
       md5-file: 5.0.0
-      node-html-parser: 4.1.4
+      node-html-parser: 4.1.5
       p-queue: 6.6.2
       sharp: 0.30.7
       string-replace-async: 2.0.0
