@@ -42,7 +42,7 @@ More markdown content.
 import unified from 'unified';
 import markdown from 'remark-parse';
 import remark2rehype from 'remark-rehype';
-import rehypeSvimg from 'rehype-svimg';
+import { rehypeSvimg } from 'rehype-svimg';
 import html from 'rehype-stringify';
 
 const processor = unified()
@@ -115,7 +115,7 @@ import unified from 'unified';
 import markdown from 'remark-parse';
 import remark2rehype from 'remark-rehype';
 import raw from 'rehype-raw';
-import rehypeSvimg from 'rehype-svimg';
+import { rehypeSvimg } from 'rehype-svimg';
 import html from 'rehype-stringify';
 
 const processor = unified()
@@ -145,7 +145,7 @@ It's possible to specify a prefix that will be automatically added to every src 
 import unified from 'unified';
 import markdown from 'remark-parse';
 import remark2rehype from 'remark-rehype';
-import rehypeSvimg from 'rehype-svimg';
+import { rehypeSvimg } from 'rehype-svimg';
 import html from 'rehype-stringify';
 import { join, dirname } from 'path';
 

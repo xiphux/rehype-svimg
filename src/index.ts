@@ -1,2 +1,1 @@
-import rehypeSvimg from './rehype-svimg';
-export default rehypeSvimg;
+export { default as rehypeSvimg } from './rehype-svimg';
