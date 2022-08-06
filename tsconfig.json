@@ -1,23 +1,15 @@
 {
-    "compilerOptions": {
-        "declaration": true,
-        "declarationDir": "./dist",
-        "module": "es6",
-        "noImplicitAny": true,
-        "outDir": "./dist",
-        "target": "es5",
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": true,
-        "moduleResolution": "node",
-        "lib": [
-            "es2015",
-            "DOM"
-        ]
-    },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "module": "es6",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
