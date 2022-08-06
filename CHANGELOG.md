@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0
+
+* BREAKING: rehype-svimg is now a named export instead of a default export (import { rehypeSvimg } from 'rehype-svimg' instead of import rehypeSvimg from 'rehype-svimg')
+* BREAKING: Drop Node 12 support
+* Code now targets ES2017
+* Support srcGenerator svimg option
+* Support skip option to skip processing images
+
 ## 0.3.0
 
 * Update svimg for AVIF support
